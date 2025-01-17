@@ -1,0 +1,67 @@
+@import '../App.css';
+
+.sign-page {
+    background-color: var(--main-bg);
+    background-size: cover;
+    background-position: center;
+}
+
+.sign-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 70vh;
+    padding-bottom: 10%;
+}
+
+.signup-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 86vh;
+    padding-bottom: 10%;
+}
+
+.sign-form {
+    width: 320px;
+    min-height: 320px;
+    background-color: var(--secondary);
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border-radius: 8px;
+    /* justify-content: space-between; */
+    box-shadow: 0 0 16px var(--prime-blue);
+    /* border: 1px solid var(--prime-blue); */
+}
+
+.sign-form label {
+    font-size: 16px;
+    font-weight: 200;
+}
+
+.form-field-block {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.form-input {
+    width: 100%;
+    margin: 4px 0;
+    background-color: transparent;
+    border: 1px solid var(--prime-blue);
+    padding: 8px 8px;
+    border-radius: 4px;
+}
+
+.form-input:focus {
+    border: 1px solid var(--prime-blue);
+    outline: none;
+    background-color: var(--t-blue);
+}

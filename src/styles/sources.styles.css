@@ -1,0 +1,106 @@
+@import '../App.css';
+
+.sources-page {
+    padding-bottom: 140px;
+}
+
+.slider-title {
+    font-weight: 300;
+    font-size: 20px;
+}
+
+.source-slider {
+    overflow-y: hidden;
+    display: flex;
+    gap: 1rem;
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+}
+
+.source-slider::-webkit-scrollbar {
+    display: none;
+}
+
+.slider-item-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 140px;
+}
+
+.slider-item {
+    height: 140px;
+    min-width: 140px;
+    border-radius: 8px;
+    background-color: var(--secondary);
+    margin-bottom: 8px;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.25);
+}
+
+.slider-item-name {
+    font-size: 12px;
+    display: inline;
+    word-break: break-all;
+    /* padding: 1rem; */
+}
+
+.like-icon {
+    font-size: 16px;
+    fill: var(--prime-blue);
+}
+
+.view-icon {
+    font-size: 16px;
+    fill: var(--prime-blue);
+}
+
+/* .source-element-page {
+    padding-bottom: 50px;
+} */
+
+.src-item-name {
+    min-height: 10vh;
+    font-size: 20px;
+    padding: 12px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 32px;
+}
+
+.icon-list-heart-inactive {
+    font-size: 26px;
+    fill: var(--secondary);
+    filter: drop-shadow(0 0 1px white) !important;
+}
+
+.icon-list-heart {
+    font-size: 24px;
+}
+
+.src-item-bg {
+    background-color: var(--secondary);
+    min-height: 75vh;
+    border-top-left-radius: 32px;
+    border-top-right-radius: 32px;
+    padding: 2rem 0;
+}
+
+.src-item-bg .container {
+    max-height: 75vh;
+    overflow-y: scroll;
+    padding-bottom: 180px;
+}
+
+.src-item-img {
+    width: 100%;
+    height: 100%;
+    margin-bottom: 1.5rem;
+}
+
+.icon-list-arrow {
+    fill: var(--prime-blue) !important;
+}
+
+.icon-list-heart {
+    fill: var(--prime-red) !important;
+}
