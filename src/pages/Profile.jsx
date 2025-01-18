@@ -66,7 +66,7 @@ const Profile = () => {
             setFileName(file.name);
             // Создаем FormData для отправки файла
             const formData = new FormData();
-            formData.append('statics', file);
+            formData.append('static', file);
 
             try {
                 // Отправляем файл на сервер
