@@ -69,30 +69,44 @@ export const AuthProvider = ({ children }) => {
         let latitude = null;
         let longitude = null;
 
-        try {
-            if (window.Telegram && window.Telegram.WebApp) {
-                const result = await window.Telegram.WebApp.requestGeolocation();
-                if (result.error) {
-                    console.error('Ошибка получения геолокации в Telegram:', result.error);
+        if (window.Telegram && window.Telegram.WebApp) {
+            window.Telegram.WebApp.ready(async () => {
+                try {
+                    const result = await window.Telegram.WebApp.requestGeolocation();
+                    if (result && result.error) {
+                        console.error('Ошибка получения геолокации в Telegram:', result.error);
+                        setError('Не удалось получить геолокацию в Telegram');
+                        setShow(true);
+                        return;
+                    }
+                    latitude = result.latitude;
+                    longitude = result.longitude;
+
+                }
+                catch (error) {
+                    console.error('Ошибка получения геолокации в Telegram:', error);
                     setError('Не удалось получить геолокацию в Telegram');
                     setShow(true);
                     return;
                 }
-                latitude = result.latitude;
-                longitude = result.longitude;
-            } else {
-                alert('TelegramWebApp not found')
+
+            })
+        } else {
+
+            alert('not found')
+            try {
                 const position = await new Promise((resolve, reject) => {
                     navigator.geolocation.getCurrentPosition(resolve, reject);
                 });
                 latitude = position.coords.latitude;
                 longitude = position.coords.longitude;
+
+            } catch (error) {
+                console.error('Ошибка получения геолокации:', error);
+                setError('Не удалось получить геолокацию');
+                setShow(true);
+                return;
             }
-        } catch (error) {
-            console.error('Ошибка получения геолокации:', error);
-            setError('Не удалось получить геолокацию');
-            setShow(true);
-            return;
         }
 
 
