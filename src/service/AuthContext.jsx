@@ -94,21 +94,6 @@ export const AuthProvider = ({ children }) => {
             return;
         }
 
-        // Получаем текущую позицию
-        try {
-            const position = await new Promise((resolve, reject) => {
-                navigator.geolocation.getCurrentPosition(resolve, reject);
-            });
-            latitude = position.coords.latitude;
-            longitude = position.coords.longitude;
-        } catch (error) {
-            console.error('Ошибка получения геолокации:', error);
-            // Можно установить ошибку, если геолокация не доступна
-            setError('Не удалось получить геолокацию');
-            setShow(true);
-            return; // Прерываем выполнение функции
-        }
-
         if (!password || !email) {
             setError('Введите корректное значение для всех полей')
         }
