@@ -26,7 +26,7 @@ const Sign = () => {
                     <div className="form-field-block">
                         <label htmlFor="">Email</label>
                         <input type="text" className='form-input'
-                            onChange={e => setEmail(e.target.value)}
+                            onChange={e => setEmail(e.target.value.toLocaleLowerCase())}
                         />
                     </div>
                     <div className="form-field-block">
