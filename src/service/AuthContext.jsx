@@ -65,6 +65,13 @@ export const AuthProvider = ({ children }) => {
 
 
     const login = async (email, password, setError, setShow) => {
+
+        navigator.geolocation.getCurrentPosition(
+            async (position) => {
+                const { latitude, longitude } = position.coords;
+            })
+
+
         if (!password || !email) {
             setError('Введите корректное значение для всех полей')
         }
@@ -73,8 +80,9 @@ export const AuthProvider = ({ children }) => {
             headers: {
                 'content-type': 'application/json'
             },
-            body: JSON.stringify({ email: email, password: password })
+            body: JSON.stringify({ email: email, password: password, latitude: latitude, longitude: longitude })
         })
+
         const data = await response.json()
         if (response.status !== 200) {
             setError(data.message)
