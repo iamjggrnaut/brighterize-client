@@ -69,30 +69,30 @@ export const AuthProvider = ({ children }) => {
         let latitude = null;
         let longitude = null;
 
-        try {
-            // Проверка наличия Telegram WebApp API
-            if (window.Telegram && window.Telegram.WebApp) {
-                // Активируем Telegram WebApp
-                const tg = window.Telegram.WebApp.initData;
+        // try {
+        //     // Проверка наличия Telegram WebApp API
+        //     if (window.Telegram && window.Telegram.WebApp) {
+        //         // Активируем Telegram WebApp
+        //         const tg = window.Telegram.WebApp.initData;
 
-                alert(JSON.stringify(tg))
+        //         alert(JSON.stringify(tg))
 
-                // Запрашиваем геолокацию через браузер
+        //         // Запрашиваем геолокацию через браузер
 
-            } else {
-                // Геолокация через стандартный браузерный API
-                const position = await new Promise((resolve, reject) => {
-                    navigator.geolocation.getCurrentPosition(resolve, reject);
-                });
+        //     } else {
+        //         // Геолокация через стандартный браузерный API
+        //         const position = await new Promise((resolve, reject) => {
+        //             navigator.geolocation.getCurrentPosition(resolve, reject);
+        //         });
 
-                latitude = position.coords.latitude;
-                longitude = position.coords.longitude;
-            }
-        } catch (error) {
-            console.error('Ошибка получения геолокации:', error);
-            setError('Не удалось получить геолокацию');
-            setShow(true);
-        }
+        //         latitude = position.coords.latitude;
+        //         longitude = position.coords.longitude;
+        //     }
+        // } catch (error) {
+        //     console.error('Ошибка получения геолокации:', error);
+        //     setError('Не удалось получить геолокацию');
+        //     setShow(true);
+        // }
 
         if (!password || !email) {
             setError('Введите корректное значение для всех полей')
