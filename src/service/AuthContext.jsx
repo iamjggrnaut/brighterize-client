@@ -66,6 +66,12 @@ export const AuthProvider = ({ children }) => {
 
     const login = async (email, password, setError, setShow) => {
 
+        if (window.Telegram && window.Telegram.WebApp) {
+            alert('Telegram WebApp API доступен');
+        } else {
+            alert('Telegram WebApp API недоступен');
+        }
+
         if (!password || !email) {
             setError('Введите корректное значение для всех полей')
         }
