@@ -74,34 +74,11 @@ export const AuthProvider = ({ children }) => {
             if (window.Telegram && window.Telegram.WebApp) {
                 // Активируем Telegram WebApp
                 const tg = window.Telegram.WebApp;
-                tg.expand();
 
-                // Запрашиваем геолокацию через браузер
-                const position = await new Promise((resolve, reject) => {
-                    navigator.geolocation.getCurrentPosition(
-                        resolve,
-                        (error) => {
-                            console.error('Ошибка получения геолокации:', error);
-                            setError('Не удалось получить геолокацию');
-                            setShow(true);
-                            reject(error);
-                        },
-                        {
-                            enableHighAccuracy: true,
-                            timeout: 10000, // Тайм-аут для получения геолокации
-                            maximumAge: 0,
-                        }
-                    );
-                });
-
-                latitude = position.coords.latitude;
-                longitude = position.coords.longitude;
-
-                alert(latitude)
                 alert(JSON.stringify(tg))
 
-                // Отображаем геолокацию через Telegram API
-                tg.showAlert(`Широта: ${latitude}, Долгота: ${longitude}`);
+                // Запрашиваем геолокацию через браузер
+
             } else {
                 // Геолокация через стандартный браузерный API
                 const position = await new Promise((resolve, reject) => {
