@@ -69,30 +69,36 @@ export const AuthProvider = ({ children }) => {
         let latitude = null;
         let longitude = null;
 
-        // try {
-        //     // Проверка наличия Telegram WebApp API
-        //     if (window.Telegram && window.Telegram.WebApp) {
-        //         // Активируем Telegram WebApp
-        //         const tg = window.Telegram.WebApp.initData;
+        if (window.Telegram && window.Telegram.WebApp) {
+            window.Telegram.WebApp.ready(() => {
+                window.Telegram.WebApp.requestWriteAccess(async (granted) => {
+                    if (granted) {
+                        try {
+                            const result = await window.Telegram.WebApp.requestGeolocation();
+                            if (result && result.error) {
+                                console.error('Ошибка получения геолокации в Telegram:', result.error);
+                                setError('Не удалось получить геолокацию в Telegram');
+                                setShow(true);
+                                return;
+                            }
+                            latitude = result.latitude;
+                            longitude = result.longitude;
+                        } catch (error) {
+                            console.error('Ошибка получения геолокации в Telegram:', error);
+                            setError('Не удалось получить геолокацию в Telegram');
+                            setShow(true);
+                            return;
+                        }
 
-        //         alert(JSON.stringify(tg))
-
-        //         // Запрашиваем геолокацию через браузер
-
-        //     } else {
-        //         // Геолокация через стандартный браузерный API
-        //         const position = await new Promise((resolve, reject) => {
-        //             navigator.geolocation.getCurrentPosition(resolve, reject);
-        //         });
-
-        //         latitude = position.coords.latitude;
-        //         longitude = position.coords.longitude;
-        //     }
-        // } catch (error) {
-        //     console.error('Ошибка получения геолокации:', error);
-        //     setError('Не удалось получить геолокацию');
-        //     setShow(true);
-        // }
+                    } else {
+                        console.error('Ошибка получения доступа к данным Telegram: Отказано в доступе');
+                        setError('Не удалось получить доступ к данным Telegram');
+                        setShow(true);
+                        return;
+                    }
+                });
+            });
+        }
 
         if (!password || !email) {
             setError('Введите корректное значение для всех полей')
