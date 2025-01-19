@@ -86,6 +86,8 @@ export const AuthProvider = ({ children }) => {
                 });
                 latitude = position.coords.latitude;
                 longitude = position.coords.longitude;
+
+
             }
         } catch (error) {
             console.error('Ошибка получения геолокации:', error);
@@ -97,6 +99,7 @@ export const AuthProvider = ({ children }) => {
         if (!password || !email) {
             setError('Введите корректное значение для всех полей')
         }
+
         const response = await fetch(URL + '/user/login', {
             method: "POST",
             headers: {
@@ -117,8 +120,6 @@ export const AuthProvider = ({ children }) => {
             window.location.href = '/sources'
         }
         return data
-
-
     }
 
     useEffect(() => {
