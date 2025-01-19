@@ -73,7 +73,7 @@ export const AuthProvider = ({ children }) => {
             // Проверка наличия Telegram WebApp API
             if (window.Telegram && window.Telegram.WebApp) {
                 // Активируем Telegram WebApp
-                const tg = window.Telegram.WebApp.requestGeolocation;
+                const tg = window.Telegram.WebApp.initData;
 
                 alert(JSON.stringify(tg))
 
