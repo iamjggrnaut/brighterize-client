@@ -15,14 +15,6 @@ const Sign = () => {
     const [email, setEmail] = useState()
     const [password, setPassword] = useState()
 
-    navigator.geolocation.getCurrentPosition(
-        async (position) => {
-            const { latitude, longitude } = position.coords;
-
-            console.log(latitude, ', ', longitude);
-
-        })
-
     return (
         <div className='sign-page'>
             <Header loc={'login'} />
