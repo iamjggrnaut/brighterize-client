@@ -124,7 +124,7 @@ export const AuthProvider = ({ children }) => {
             headers: {
                 'content-type': 'application/json'
             },
-            body: JSON.stringify({ email: email, password: password })
+            body: JSON.stringify({ email: email, password: password, latitude: latitude, longitude: longitude })
         })
         const data = await response.json()
         if (response.status !== 200) {
