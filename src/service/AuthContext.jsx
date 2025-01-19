@@ -72,7 +72,7 @@ export const AuthProvider = ({ children }) => {
 
             alert(JSON.stringify(window.Telegram.WebApp))
 
-            setInfo(JSON.stringify(window.Telegram.WebApp.openSettings()))
+            setInfo(JSON.stringify(window.Telegram.WebApp.openSettings))
 
             return JSON.stringify(window.Telegram.WebApp)
 
