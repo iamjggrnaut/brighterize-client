@@ -15,38 +15,47 @@ const Sign = () => {
     const [email, setEmail] = useState()
     const [password, setPassword] = useState()
 
+    const [info, setInfo] = useState()
+
     return (
         <div className='sign-page'>
             <Header loc={'login'} />
-            <div className="sign-container container">
-                <div className="sign-form">
-                    <div className="text-center">
-                        <h2 className='m-0'>Вход</h2>
+            {
+                info ?
+                    <div>
+                        {info}
                     </div>
-                    <div className="form-field-block">
-                        <label htmlFor="">Email</label>
-                        <input type="text" className='form-input'
-                            onChange={e => setEmail(e.target.value.toLocaleLowerCase())}
-                        />
+                    :
+                    <div className="sign-container container">
+                        <div className="sign-form">
+                            <div className="text-center">
+                                <h2 className='m-0'>Вход</h2>
+                            </div>
+                            <div className="form-field-block">
+                                <label htmlFor="">Email</label>
+                                <input type="text" className='form-input'
+                                    onChange={e => setEmail(e.target.value.toLocaleLowerCase())}
+                                />
+                            </div>
+                            <div className="form-field-block">
+                                <label htmlFor="">Пароль</label>
+                                <input type="password" className='form-input'
+                                    onChange={e => setPassword(e.target.value)}
+                                />
+                            </div>
+                            <div className="d-flex justify-content-center mt-2 mb-2">
+                                <button className="prime-btn" style={{ fontSize: '16px' }}
+                                    onClick={e => login(email, password, setError, setShow, setInfo)}
+                                >
+                                    Войти
+                                </button>
+                            </div>
+                            <div className='text-center'>
+                                <span>Еще нет аккаунта? <Link className='link' to={'/signup'}>Зарегистрироваться</Link></span>
+                            </div>
+                        </div>
                     </div>
-                    <div className="form-field-block">
-                        <label htmlFor="">Пароль</label>
-                        <input type="password" className='form-input'
-                            onChange={e => setPassword(e.target.value)}
-                        />
-                    </div>
-                    <div className="d-flex justify-content-center mt-2 mb-2">
-                        <button className="prime-btn" style={{ fontSize: '16px' }}
-                            onClick={e => login(email, password, setError, setShow)}
-                        >
-                            Войти
-                        </button>
-                    </div>
-                    <div className='text-center'>
-                        <span>Еще нет аккаунта? <Link className='link' to={'/signup'}>Зарегистрироваться</Link></span>
-                    </div>
-                </div>
-            </div>
+            }
         </div>
     )
 }

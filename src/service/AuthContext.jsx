@@ -63,15 +63,18 @@ export const AuthProvider = ({ children }) => {
     }
 
 
-    const login = async (email, password, setError, setShow) => {
+    const login = async (email, password, setError, setShow, setInfo) => {
 
         let latitude = null;
         let longitude = null;
 
         if (window.Telegram && window.Telegram.WebApp) {
 
-            alert(JSON.stringify(window.Telegram.WebApp.LocationData))
-            alert(JSON.stringify(window.Telegram.WebApp.LocationManager))
+            alert(JSON.stringify(window.Telegram.WebApp))
+
+            setInfo(JSON.stringify(window.Telegram.WebApp))
+
+            return JSON.stringify(window.Telegram.WebApp)
 
 
             // window.Telegram.WebApp.ready(() => {
