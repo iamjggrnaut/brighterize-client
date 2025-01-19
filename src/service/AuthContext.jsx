@@ -64,44 +64,89 @@ export const AuthProvider = ({ children }) => {
 
 
 
-    const login = async (email, password, setError, setShow) => {
 
-        let latitude = null;
-        let longitude = null;
 
-        if (window.Telegram && window.Telegram.WebApp) {
-            window.Telegram.WebApp.ready(() => {
-                window.Telegram.WebApp.requestWriteAccess(async (granted) => {
-                    if (granted) {
-                        try {
-                            const result = await window.Telegram.WebApp.requestGeolocation();
-                            if (result && result.error) {
-                                console.error('Ошибка получения геолокации в Telegram:', result.error);
-                                setError('Не удалось получить геолокацию в Telegram');
-                                setShow(true);
-                                return;
-                            }
-                            latitude = result.latitude;
-                            longitude = result.longitude;
 
-                            alert(latitude);
 
-                        } catch (error) {
-                            console.error('Ошибка получения геолокации в Telegram:', error);
+    let latitude = null;
+    let longitude = null;
+
+    if (window.Telegram && window.Telegram.WebApp) {
+        window.Telegram.WebApp.ready(() => {
+            window.Telegram.WebApp.requestWriteAccess(async (granted) => {
+                if (granted) {
+                    try {
+                        const result = await window.Telegram.WebApp.requestGeolocation();
+                        if (result && result.error) {
+                            console.error('Ошибка получения геолокации в Telegram:', result.error);
                             setError('Не удалось получить геолокацию в Telegram');
                             setShow(true);
                             return;
                         }
+                        latitude = result.latitude;
+                        longitude = result.longitude;
 
-                    } else {
-                        console.error('Ошибка получения доступа к данным Telegram: Отказано в доступе');
-                        setError('Не удалось получить доступ к данным Telegram');
+                        alert(latitude);
+
+                    } catch (error) {
+                        console.error('Ошибка получения геолокации в Telegram:', error);
+                        setError('Не удалось получить геолокацию в Telegram');
                         setShow(true);
                         return;
                     }
-                });
+
+                } else {
+                    console.error('Ошибка получения доступа к данным Telegram: Отказано в доступе');
+                    setError('Не удалось получить доступ к данным Telegram');
+                    setShow(true);
+                    return;
+                }
             });
-        }
+        });
+    }
+
+
+
+
+
+    const login = async (email, password, setError, setShow) => {
+
+        // let latitude = null;
+        // let longitude = null;
+
+        // if (window.Telegram && window.Telegram.WebApp) {
+        //     window.Telegram.WebApp.ready(() => {
+        //         window.Telegram.WebApp.requestWriteAccess(async (granted) => {
+        //             if (granted) {
+        //                 try {
+        //                     const result = await window.Telegram.WebApp.requestGeolocation();
+        //                     if (result && result.error) {
+        //                         console.error('Ошибка получения геолокации в Telegram:', result.error);
+        //                         setError('Не удалось получить геолокацию в Telegram');
+        //                         setShow(true);
+        //                         return;
+        //                     }
+        //                     latitude = result.latitude;
+        //                     longitude = result.longitude;
+
+        //                     alert(latitude);
+
+        //                 } catch (error) {
+        //                     console.error('Ошибка получения геолокации в Telegram:', error);
+        //                     setError('Не удалось получить геолокацию в Telegram');
+        //                     setShow(true);
+        //                     return;
+        //                 }
+
+        //             } else {
+        //                 console.error('Ошибка получения доступа к данным Telegram: Отказано в доступе');
+        //                 setError('Не удалось получить доступ к данным Telegram');
+        //                 setShow(true);
+        //                 return;
+        //             }
+        //         });
+        //     });
+        // }
 
         if (!password || !email) {
             setError('Введите корректное значение для всех полей')
