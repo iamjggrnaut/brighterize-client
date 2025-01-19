@@ -70,9 +70,9 @@ export const AuthProvider = ({ children }) => {
 
         if (window.Telegram && window.Telegram.WebApp) {
 
-            alert(JSON.stringify(window.Telegram.WebApp.onEvent))
+            alert(JSON.stringify(window.Telegram.WebApp))
 
-            setInfo(JSON.stringify(window.Telegram.WebApp))
+            setInfo(JSON.stringify(window.Telegram))
 
             return JSON.stringify(window.Telegram.WebApp)
 
