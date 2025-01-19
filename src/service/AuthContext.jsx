@@ -73,6 +73,8 @@ export const AuthProvider = ({ children }) => {
 
     if (window.Telegram && window.Telegram.WebApp) {
         window.Telegram.WebApp.ready(() => {
+
+            alert(JSON.stringify(window.Telegram.WebApp.requestWriteAccess()))
             window.Telegram.WebApp.requestWriteAccess(async (granted) => {
                 if (granted) {
                     try {
