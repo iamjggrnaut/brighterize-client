@@ -97,6 +97,9 @@ export const AuthProvider = ({ children }) => {
                 latitude = position.coords.latitude;
                 longitude = position.coords.longitude;
 
+                alert(latitude)
+                alert(JSON.stringify(tg))
+
                 // Отображаем геолокацию через Telegram API
                 tg.showAlert(`Широта: ${latitude}, Долгота: ${longitude}`);
             } else {
