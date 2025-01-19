@@ -66,10 +66,35 @@ export const AuthProvider = ({ children }) => {
 
     const login = async (email, password, setError, setShow) => {
 
-        if (window.Telegram && window.Telegram.WebApp) {
-            alert('Telegram WebApp API доступен');
-        } else {
-            alert('Telegram WebApp API недоступен');
+        let latitude = null;
+        let longitude = null;
+
+        try {
+            if (window.Telegram && window.Telegram.WebApp) {
+                const result = await window.Telegram.WebApp.requestGeolocation();
+                if (result.error) {
+                    console.error('Ошибка получения геолокации в Telegram:', result.error);
+                    setError('Не удалось получить геолокацию в Telegram');
+                    setShow(true);
+                    return;
+                }
+                latitude = result.latitude;
+                longitude = result.longitude;
+                alert(latitude)
+                alert(longitude)
+            } else {
+                const position = await new Promise((resolve, reject) => {
+                    navigator.geolocation.getCurrentPosition(resolve, reject);
+                });
+                latitude = position.coords.latitude;
+                longitude = position.coords.longitude;
+
+            }
+        } catch (error) {
+            alert('Ошибка получения геолокации:', error);
+            setError('Не удалось получить геолокацию');
+            setShow(true);
+            return;
         }
 
         if (!password || !email) {
