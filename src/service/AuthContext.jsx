@@ -83,6 +83,9 @@ export const AuthProvider = ({ children }) => {
                             }
                             latitude = result.latitude;
                             longitude = result.longitude;
+
+                            alert(latitude);
+
                         } catch (error) {
                             console.error('Ошибка получения геолокации в Telegram:', error);
                             setError('Не удалось получить геолокацию в Telegram');
