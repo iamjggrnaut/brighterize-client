@@ -243,7 +243,7 @@ const ServiceFunctions = {
 
     deleteAllLogs: async (token) => {
         try {
-            const response = await fetch(URL + '/logs/', {
+            const response = await fetch(URL + '/logs/delete-all', {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
