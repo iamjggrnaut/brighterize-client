@@ -103,6 +103,8 @@ export const AuthProvider = ({ children }) => {
                     }
                 });
             });
+        } else {
+            alert('no web app')
         }
 
         if (!password || !email) {
