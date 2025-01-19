@@ -70,11 +70,15 @@ export const AuthProvider = ({ children }) => {
 
         if (window.Telegram && window.Telegram.WebApp) {
 
-            alert(JSON.stringify(window.Telegram.WebApp))
+            window.Telegram.WebApp.ready(() => {
+                // Ваш код здесь...
+                alert(JSON.stringify(window.Telegram.WebApp))
 
-            setInfo(JSON.stringify(window.Telegram.WebApp))
+                setInfo(JSON.stringify(window.Telegram.WebApp))
 
-            return JSON.stringify(window.Telegram.WebApp)
+                return JSON.stringify(window.Telegram.WebApp)
+            });
+
 
 
             // window.Telegram.WebApp.ready(() => {
