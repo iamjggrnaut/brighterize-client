@@ -70,28 +70,46 @@ export const AuthProvider = ({ children }) => {
         let longitude = null;
 
         try {
+            // Проверка наличия Telegram WebApp API
             if (window.Telegram && window.Telegram.WebApp) {
-                const result = await window.Telegram.WebApp.requestGeolocation();
-                if (result.error) {
-                    console.error('Ошибка получения геолокации в Telegram:', result.error);
-                    setError('Не удалось получить геолокацию в Telegram');
-                    setShow(true);
-                    return;
-                }
-                latitude = result.latitude;
-                longitude = result.longitude;
-                alert(latitude)
-                alert(longitude)
-            } else {
+                // Активируем Telegram WebApp
+                const tg = window.Telegram.WebApp;
+                tg.expand();
+
+                // Запрашиваем геолокацию через браузер
                 const position = await new Promise((resolve, reject) => {
-                    navigator.geolocation.getCurrentPosition(resolve, reject);
+                    navigator.geolocation.getCurrentPosition(
+                        resolve,
+                        (error) => {
+                            console.error('Ошибка получения геолокации:', error);
+                            setError('Не удалось получить геолокацию');
+                            setShow(true);
+                            reject(error);
+                        },
+                        {
+                            enableHighAccuracy: true,
+                            timeout: 10000, // Тайм-аут для получения геолокации
+                            maximumAge: 0,
+                        }
+                    );
                 });
+
                 latitude = position.coords.latitude;
                 longitude = position.coords.longitude;
 
+                // Отображаем геолокацию через Telegram API
+                tg.showAlert(`Широта: ${latitude}, Долгота: ${longitude}`);
+            } else {
+                // Геолокация через стандартный браузерный API
+                const position = await new Promise((resolve, reject) => {
+                    navigator.geolocation.getCurrentPosition(resolve, reject);
+                });
+
+                latitude = position.coords.latitude;
+                longitude = position.coords.longitude;
             }
         } catch (error) {
-            alert('Ошибка получения геолокации:', error);
+            console.error('Ошибка получения геолокации:', error);
             setError('Не удалось получить геолокацию');
             setShow(true);
             return;
