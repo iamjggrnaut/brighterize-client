@@ -234,6 +234,7 @@ const ServiceFunctions = {
                 throw new Error('Failed');
             }
 
+            window.location.reload()
             const data = await response.json();
             return data
         } catch (error) {
@@ -255,6 +256,7 @@ const ServiceFunctions = {
                 throw new Error('Failed');
             }
 
+            window.location.reload()
             const data = await response.json();
             return data
         } catch (error) {
