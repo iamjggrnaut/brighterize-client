@@ -69,44 +69,50 @@ export const AuthProvider = ({ children }) => {
         let latitude = null;
         let longitude = null;
 
-        if (window.Telegram && window.Telegram.WebApp) {
-            window.Telegram.WebApp.ready(async () => {
-                try {
-                    const result = await window.Telegram.WebApp.requestGeolocation();
-                    if (result && result.error) {
-                        console.error('Ошибка получения геолокации в Telegram:', result.error);
+        const checkTelegram = async () => {
+            if (window.Telegram && window.Telegram.WebApp) {
+                window.Telegram.WebApp.ready(async () => {
+                    try {
+                        const result = await window.Telegram.WebApp.requestGeolocation();
+                        if (result && result.error) {
+                            console.error('Ошибка получения геолокации в Telegram:', result.error);
+                            setError('Не удалось получить геолокацию в Telegram');
+                            setShow(true);
+                            return;
+                        }
+                        latitude = result.latitude;
+                        longitude = result.longitude;
+
+                    }
+                    catch (error) {
+                        console.error('Ошибка получения геолокации в Telegram:', error);
                         setError('Не удалось получить геолокацию в Telegram');
                         setShow(true);
                         return;
                     }
-                    latitude = result.latitude;
-                    longitude = result.longitude;
 
-                }
-                catch (error) {
-                    console.error('Ошибка получения геолокации в Telegram:', error);
-                    setError('Не удалось получить геолокацию в Telegram');
+                })
+            } else {
+                alert('not found')
+                try {
+                    const position = await new Promise((resolve, reject) => {
+                        navigator.geolocation.getCurrentPosition(resolve, reject);
+                    });
+                    latitude = position.coords.latitude;
+                    longitude = position.coords.longitude;
+
+                } catch (error) {
+                    console.error('Ошибка получения геолокации:', error);
+                    setError('Не удалось получить геолокацию');
                     setShow(true);
                     return;
                 }
-
-            })
-        } else {
-
-            alert('not found')
-            try {
-                const position = await new Promise((resolve, reject) => {
-                    navigator.geolocation.getCurrentPosition(resolve, reject);
-                });
-                latitude = position.coords.latitude;
-                longitude = position.coords.longitude;
-
-            } catch (error) {
-                console.error('Ошибка получения геолокации:', error);
-                setError('Не удалось получить геолокацию');
-                setShow(true);
-                return;
             }
+        }
+        if (window.Telegram) {
+            checkTelegram()
+        } else {
+            setTimeout(checkTelegram, 1000)
         }
 
 
