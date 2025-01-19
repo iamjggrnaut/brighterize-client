@@ -65,78 +65,30 @@ export const AuthProvider = ({ children }) => {
 
     const login = async (email, password, setError, setShow, setInfo) => {
 
-        let latitude = null;
-        let longitude = null;
-
-        if (window.Telegram && window.Telegram.WebApp) {
-
-            alert(JSON.stringify(window.Telegram.WebApp))
-
-            setInfo(JSON.stringify(window.Telegram.WebApp.LocationManager))
-
-            return JSON.stringify(window.Telegram.WebApp)
 
 
-            // window.Telegram.WebApp.ready(() => {
-
-            //     alert('ready')
-            //     window.Telegram.WebApp.requestWriteAccess(async (granted) => {
-            //         if (granted) {
-            //             try {
-            //                 const result = await window.Telegram.WebApp.requestGeolocation();
-            //                 if (result && result.error) {
-            //                     console.error('Ошибка получения геолокации в Telegram:', result.error);
-            //                     setError('Не удалось получить геолокацию в Telegram');
-            //                     setShow(true);
-            //                     return;
-            //                 }
-            //                 latitude = result.latitude;
-            //                 longitude = result.longitude;
-
-            //                 alert(latitude);
-
-            //             } catch (error) {
-            //                 alert(error)
-            //                 console.error('Ошибка получения геолокации в Telegram:', error);
-            //                 setError('Не удалось получить геолокацию в Telegram');
-            //                 setShow(true);
-            //                 return;
-            //             }
-
-            //         } else {
-            //             console.error('Ошибка получения доступа к данным Telegram: Отказано в доступе');
-            //             setError('Не удалось получить доступ к данным Telegram');
-            //             setShow(true);
-            //             return;
-            //         }
-            //     });
-            // });
-        } else {
-            alert('no web app')
+        if (!password || !email) {
+            setError('Введите корректное значение для всех полей')
         }
-
-        // if (!password || !email) {
-        //     setError('Введите корректное значение для всех полей')
-        // }
-        // const response = await fetch(URL + '/user/login', {
-        //     method: "POST",
-        //     headers: {
-        //         'content-type': 'application/json'
-        //     },
-        //     body: JSON.stringify({ email: email, password: password })
-        // })
-        // const data = await response.json()
-        // if (response.status !== 200) {
-        //     setError(data.message)
-        //     setShow(true)
-        // }
-        // if (response.status === 200) {
-        //     setAuthToken(data)
-        //     setUser(jwtDecode(data?.token))
-        //     localStorage.setItem('authToken', data?.token)
-        //     window.location.href = '/sources'
-        // }
-        // return data
+        const response = await fetch(URL + '/user/login', {
+            method: "POST",
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify({ email: email, password: password })
+        })
+        const data = await response.json()
+        if (response.status !== 200) {
+            setError(data.message)
+            setShow(true)
+        }
+        if (response.status === 200) {
+            setAuthToken(data)
+            setUser(jwtDecode(data?.token))
+            localStorage.setItem('authToken', data?.token)
+            window.location.href = '/sources'
+        }
+        return data
     }
 
     useEffect(() => {
