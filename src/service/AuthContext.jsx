@@ -70,7 +70,32 @@ export const AuthProvider = ({ children }) => {
 
         if (window.Telegram && window.Telegram.WebApp) {
 
-            alert(JSON.stringify(window.Telegram.WebApp.LocationManager))
+            alert(JSON.stringify(window.Telegram.WebApp.LocationManager.getLocation(async (granted) => {
+                if (granted) {
+                    try {
+                        const result = await window.Telegram.WebApp.requestGeolocation();
+                        if (result && result.error) {
+                            console.error('Ошибка получения геолокации в Telegram:', result.error);
+                            setError('Не удалось получить геолокацию в Telegram');
+                            setShow(true);
+                            return;
+                        }
+                        latitude = result.latitude;
+                        longitude = result.longitude;
+                    } catch (error) {
+                        console.error('Ошибка получения геолокации в Telegram:', error);
+                        setError('Не удалось получить геолокацию в Telegram');
+                        setShow(true);
+                        return;
+                    }
+
+                } else {
+                    console.error('Ошибка получения доступа к данным Telegram: Отказано в доступе');
+                    setError('Не удалось получить доступ к данным Telegram');
+                    setShow(true);
+                    return;
+                }
+            })))
 
             // window.Telegram.WebApp.ready(() => {
 
