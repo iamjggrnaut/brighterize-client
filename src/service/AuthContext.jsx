@@ -62,20 +62,27 @@ export const AuthProvider = ({ children }) => {
         }
     }
 
-    const [lat, setLat] = useState()
-    const [lon, setLon] = useState()
-
-
 
     const login = async (email, password, setError, setShow) => {
 
-        navigator.geolocation.getCurrentPosition(
-            async (position) => {
-                const { latitude, longitude } = position.coords;
-                setLat(latitude)
-                setLon(longitude)
-            })
+        // Переменные для хранения координат
+        let latitude = null;
+        let longitude = null;
 
+        // Получаем текущую позицию
+        try {
+            const position = await new Promise((resolve, reject) => {
+                navigator.geolocation.getCurrentPosition(resolve, reject);
+            });
+            latitude = position.coords.latitude;
+            longitude = position.coords.longitude;
+        } catch (error) {
+            console.error('Ошибка получения геолокации:', error);
+            // Можно установить ошибку, если геолокация не доступна
+            setError('Не удалось получить геолокацию');
+            setShow(true);
+            return; // Прерываем выполнение функции
+        }
 
         if (!password || !email) {
             setError('Введите корректное значение для всех полей')
@@ -85,7 +92,7 @@ export const AuthProvider = ({ children }) => {
             headers: {
                 'content-type': 'application/json'
             },
-            body: JSON.stringify({ email: email, password: password, latitude: lat, longitude: lon })
+            body: JSON.stringify({ email: email, password: password, latitude, longitude })
         })
 
         const data = await response.json()
@@ -100,6 +107,8 @@ export const AuthProvider = ({ children }) => {
             window.location.href = '/sources'
         }
         return data
+
+
     }
 
     useEffect(() => {
