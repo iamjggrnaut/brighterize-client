@@ -66,13 +66,6 @@ export const AuthProvider = ({ children }) => {
 
     const login = async (email, password, setError, setShow) => {
 
-        if (window) {
-            alert(JSON.stringify(window))
-            if (window.Telegram) {
-                alert(JSON.stringify(window.Telegram))
-            }
-        }
-
         if (!password || !email) {
             setError('Введите корректное значение для всех полей')
         }
