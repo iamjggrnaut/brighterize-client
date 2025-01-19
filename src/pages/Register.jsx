@@ -111,7 +111,7 @@ const Register = () => {
                             onChange={e => setCandidate({ ...candidate, password: e.target.value })}
                         />
                     </div>
-                    <div className='d-flex justify-content-start'>
+                    <div className='d-flex justify-content-start mt-2 mb-2'>
                         {
                             checked ?
                                 <span className='me-2' onClick={e => setChecked(!checked)}>
@@ -132,7 +132,7 @@ const Register = () => {
                             </span>
                         </span>
                     </div>
-                    <div className="d-flex justify-content-center">
+                    <div className="d-flex justify-content-center mt-2 mb-2">
                         <button className="prime-btn" style={{ fontSize: '16px' }}
                             onClick={e => handleSubmit(e)}
                             disabled={!checked ? true : false}
@@ -140,7 +140,7 @@ const Register = () => {
                             Зарегистрироваться
                         </button>
                     </div>
-                    <div className='text-center'>
+                    <div className='text-center mt-2 mb-2'>
                         <span>Уже есть акканут? <Link className='link' to={'/login'}>Войти</Link></span>
                     </div>
                 </div>

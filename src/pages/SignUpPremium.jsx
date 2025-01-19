@@ -95,7 +95,7 @@ const SignUpPremium = () => {
                         <label htmlFor="">Password</label>
                         <input type="password" className="form-input" />
                     </div>
-                    <div className='d-flex justify-content-start'>
+                    <div className='d-flex justify-content-start mt-2 mb-2'>
                         {
                             checked ?
                                 <span className='me-2' onClick={e => setChecked(!checked)}>
@@ -116,12 +116,12 @@ const SignUpPremium = () => {
                             </span>
                         </span>
                     </div>
-                    <div className="d-flex justify-content-center">
+                    <div className="d-flex justify-content-center mt-2 mb-2">
                         <button className="prime-btn" style={{ backgroundColor: 'var(--plan-title)' }}>
                             Оплатить
                         </button>
                     </div>
-                    <div className='text-center'>
+                    <div className='text-center mt-2 mb-2'>
                         <span>Already have an account? <Link className='link' to={'/login'}>Log in</Link></span>
                     </div>
                 </div>
