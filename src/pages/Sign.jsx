@@ -22,7 +22,7 @@ const Sign = () => {
             <Header loc={'login'} />
             {
                 info ?
-                    <div>
+                    <div style={{ overflowY: 'scroll' }}>
                         {info}
                     </div>
                     :
