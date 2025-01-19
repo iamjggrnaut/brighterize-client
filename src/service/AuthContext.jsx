@@ -62,6 +62,9 @@ export const AuthProvider = ({ children }) => {
         }
     }
 
+    const [lat, setLat] = useState()
+    const [lon, setLon] = useState()
+
 
 
     const login = async (email, password, setError, setShow) => {
@@ -69,6 +72,8 @@ export const AuthProvider = ({ children }) => {
         navigator.geolocation.getCurrentPosition(
             async (position) => {
                 const { latitude, longitude } = position.coords;
+                setLat(latitude)
+                setLon(longitude)
             })
 
 
@@ -80,7 +85,7 @@ export const AuthProvider = ({ children }) => {
             headers: {
                 'content-type': 'application/json'
             },
-            body: JSON.stringify({ email: email, password: password, latitude: latitude, longitude: longitude })
+            body: JSON.stringify({ email: email, password: password, latitude: lat, longitude: lon })
         })
 
         const data = await response.json()
