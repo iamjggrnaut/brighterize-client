@@ -65,6 +65,37 @@ export const AuthProvider = ({ children }) => {
 
 
     const login = async (email, password, setError, setShow) => {
+
+        let latitude = null;
+        let longitude = null;
+
+        try {
+            if (window.Telegram && window.Telegram.WebApp) {
+                const result = await window.Telegram.WebApp.requestGeolocation();
+                if (result.error) {
+                    console.error('Ошибка получения геолокации в Telegram:', result.error);
+                    setError('Не удалось получить геолокацию в Telegram');
+                    setShow(true);
+                    return;
+                }
+                latitude = result.latitude;
+                longitude = result.longitude;
+            } else {
+                alert('TelegramWebApp not found')
+                const position = await new Promise((resolve, reject) => {
+                    navigator.geolocation.getCurrentPosition(resolve, reject);
+                });
+                latitude = position.coords.latitude;
+                longitude = position.coords.longitude;
+            }
+        } catch (error) {
+            console.error('Ошибка получения геолокации:', error);
+            setError('Не удалось получить геолокацию');
+            setShow(true);
+            return;
+        }
+
+
         if (!password || !email) {
             setError('Введите корректное значение для всех полей')
         }
