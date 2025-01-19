@@ -69,7 +69,7 @@ export const AuthProvider = ({ children }) => {
         if (window) {
             alert(JSON.stringify(window))
             if (window.Telegram) {
-                alert(window.Telegram)
+                alert(JSON.stringify(window.Telegram))
             }
         }
 
