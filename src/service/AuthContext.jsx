@@ -72,6 +72,9 @@ export const AuthProvider = ({ children }) => {
 
             alert(JSON.stringify(window.Telegram.WebApp.LocationData))
 
+            console.log(JSON.stringify(window.Telegram.WebApp));
+
+
             // window.Telegram.WebApp.ready(() => {
 
             //     alert('ready')
