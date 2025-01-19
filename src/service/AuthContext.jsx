@@ -115,7 +115,6 @@ export const AuthProvider = ({ children }) => {
             console.error('Ошибка получения геолокации:', error);
             setError('Не удалось получить геолокацию');
             setShow(true);
-            return;
         }
 
         if (!password || !email) {
