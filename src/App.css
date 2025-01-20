@@ -172,7 +172,7 @@
   background-color: var(--secondary);
   z-index: 999999;
   padding-top: 50px;
-  overflow: hidden;
+  overflow-y: hidden;
 
   transition: all 0.25s ease-in-out;
 }
@@ -186,7 +186,7 @@
   background-color: var(--secondary);
   z-index: 999999;
   padding-top: 50px;
-  overflow: hidden;
+  overflow-y: hidden;
 
   transition: all 0.25s ease-in-out;
 }
@@ -335,7 +335,11 @@ option {
   color: var(--prime-blue);
 }
 
-
+.category-list {
+  height: 85vh !important;
+  overflow-y: scroll !important;
+  padding-bottom: 50px;
+}
 
 
 @media screen and (min-width: 1048px) {

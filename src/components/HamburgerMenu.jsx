@@ -11,10 +11,12 @@ const HamburgerMenu = ({ show, setShow }) => {
     return (
         <div className={show ? 'hamburger-menu' : 'hamburger-hidden'}>
             <div className="container col-11">
-                <div className='d-flex align-items-center justify-content-between'>
+                <div className='d-flex align-items-center justify-content-between mb-3'>
                     <h3>Категории</h3>
                     <span onClick={e => setShow(false)} className='pb-2'><IoMdClose style={{ width: 32, height: 32 }} /></span>
                 </div>
+            </div>
+            <div className="container col-11 category-list">
                 <div className="mt-4">
                     <p
                         className={activeCategory ? '' : 'active-category'}

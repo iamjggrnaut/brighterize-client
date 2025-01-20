@@ -123,12 +123,13 @@ const Profile = () => {
     const changeUserData = async (id, userData, authToken) => {
         ServiceFunctions.updateUser(id, userData).then(data => {
             if (data && data.token) {
-                setEdit(true)
+                setEdit(false)
                 setUser(jwtDecode(data.token))
                 localStorage.setItem('authToken', data.token)
                 // window.location.reload()
             }
         })
+        setEdit(false)
     }
 
 
