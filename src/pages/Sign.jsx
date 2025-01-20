@@ -38,6 +38,11 @@ const Sign = () => {
                             onChange={e => setPassword(e.target.value)}
                         />
                     </div>
+                    {
+                        show ?
+                        <span className='error'>{error}</span>
+                    : null    
+                    }
                     <div className="d-flex justify-content-center mt-2 mb-2">
                         <button className="prime-btn" style={{ fontSize: '16px' }}
                             onClick={e => login(phone, password, setError, setShow, setInfo)}
