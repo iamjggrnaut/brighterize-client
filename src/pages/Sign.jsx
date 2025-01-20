@@ -12,7 +12,7 @@ const Sign = () => {
     const [error, setError] = useState()
     const [show, setShow] = useState(false)
 
-    const [email, setEmail] = useState()
+    const [phone, setPhone] = useState()
     const [password, setPassword] = useState()
 
     const [info, setInfo] = useState()
@@ -26,9 +26,10 @@ const Sign = () => {
                         <h2 className='m-0'>Вход</h2>
                     </div>
                     <div className="form-field-block">
-                        <label htmlFor="">Email</label>
+                        <label htmlFor="">Номер телефона</label>
                         <input type="text" className='form-input'
-                            onChange={e => setEmail(e.target.value.toLocaleLowerCase())}
+                            onChange={e => setPhone(e.target.value.toLocaleLowerCase())}
+                            placeholder='79998765432'
                         />
                     </div>
                     <div className="form-field-block">
@@ -39,7 +40,7 @@ const Sign = () => {
                     </div>
                     <div className="d-flex justify-content-center mt-2 mb-2">
                         <button className="prime-btn" style={{ fontSize: '16px' }}
-                            onClick={e => login(email, password, setError, setShow, setInfo)}
+                            onClick={e => login(phone, password, setError, setShow, setInfo)}
                         >
                             Войти
                         </button>

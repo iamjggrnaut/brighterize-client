@@ -63,11 +63,11 @@ export const AuthProvider = ({ children }) => {
     }
 
 
-    const login = async (email, password, setError, setShow, setInfo) => {
+    const login = async (phone, password, setError, setShow, setInfo) => {
 
 
 
-        if (!password || !email) {
+        if (!password || !phone) {
             setError('Введите корректное значение для всех полей')
         }
         const response = await fetch(URL + '/user/login', {
@@ -75,7 +75,7 @@ export const AuthProvider = ({ children }) => {
             headers: {
                 'content-type': 'application/json'
             },
-            body: JSON.stringify({ email: email, password: password })
+            body: JSON.stringify({ phone: phone, password: password })
         })
         const data = await response.json()
         if (response.status !== 200) {
