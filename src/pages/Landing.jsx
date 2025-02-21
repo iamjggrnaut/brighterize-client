@@ -160,7 +160,7 @@ const Landing = () => {
                         <div className="plan-option">
                             <h2>Premium</h2>
                             <p className="fs-5">
-                                Полный доступ к курсам, видео и всем материалам. <span className="fw-bold">699р./мес</span>
+                                Полный доступ к курсам, видео и всем материалам. <span className="fw-bold">449 руб./мес</span>
                             </p>
                             <button className="prime-btn" style={{ backgroundColor: 'var(--plan-title)' }}>Подписаться</button>
                         </div>

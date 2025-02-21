@@ -260,9 +260,13 @@
 }
 
 .terms-of-service h2,
-.terms-of-service h3 {
+.terms-of-service h4 {
   margin-bottom: 15px;
   color: var(--prime-blue);
+}
+
+.terms-of-service footer {
+  font-size: 14px;
 }
 
 .terms-of-service section {
@@ -317,11 +321,12 @@ option {
 
 .footer-container {
   display: flex;
-  flex-direction: column;
+  flex-direction: column !important;
+  align-items: flex-start;
+  font-size: 12px;
 }
 
 .col-right {
-
   margin-top: 20px;
 }
 
@@ -330,7 +335,7 @@ option {
 }
 
 .main-link {
-  font-size: 16px !important;
+  font-size: 12px !important;
   text-decoration: none;
   color: var(--prime-blue);
 }
@@ -451,6 +456,7 @@ option {
 
   .footer-container {
     display: flex;
+    flex-direction: row !important;
     justify-content: space-between;
   }
 
@@ -460,13 +466,19 @@ option {
     align-items: flex-end;
   }
 
+
+
   .landing-page {
     padding-bottom: 0;
   }
 
   .main-link {
-    font-size: 16px;
+    font-size: 12px !important;
     text-decoration: none;
+    color: var(--prime-blue);
+  }
+
+  .main-link:hover {
     color: var(--prime-blue);
   }
 
